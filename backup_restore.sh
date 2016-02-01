@@ -5,14 +5,15 @@ export ARCHIVO='kuriju'
 export PGPASSWORD="postgres"
 export FECHA=`date +%Y%m%d%H%M`
 export NAME=${ARCHIVO}${FECHA}.dmp
+export IPREMOTO="192.168.0.7"
 
 cd $DIR
 > ${NAME}
 # chmod 777 ${NAME}
-#vacuumdb -U postgres -h 192.168.0.7 -d kuriju -f -z -v
+#vacuumdb -U postgres -h ${IPREMOTO} -d kuriju -f -z -v
 #date
 echo 'Se inicia BACKUP........'
-pg_dump -U postgres -h 192.168.0.7 -F c -b -v -f ${NAME} ${ARCHIVO}
+pg_dump -U postgres -h ${IPREMOTO} -F c -b -v -f ${NAME} ${ARCHIVO}
 return_code=$?
 date
 if [ $return_code -ne 0 ]
