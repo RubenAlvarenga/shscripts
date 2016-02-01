@@ -21,6 +21,9 @@ then
         date
         echo 'Error en el backup. Compruebe: usuario y permisos'
 else
+		psql -h localhost -U postgres -c "DROP DATABASE ${ARCHIVO};"
+		psql -h localhost -U postgres -c "CREATE DATABASE ${ARCHIVO};"
+
         pg_restore -i -h localhost -p 5432 -U postgres  -d ${ARCHIVO} -v ${NAME}
 
         echo 'RESTAURACION COMPLETA..... iniciando compresion'
